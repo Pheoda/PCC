@@ -2,12 +2,13 @@ import java.util.ArrayList;
 
 public class Graph {
 	private final int MAX_DISTANCE = 20;
-	ArrayList<City> cities;
 
-	public Graph(Reader r) {
+	private ArrayList<City> cities;
+
+    public Graph(Reader r) {
 		this.cities = new ArrayList<>();
 
-		City cityRead = null;
+		City cityRead;
 
 		do {
 			cityRead = r.read();
@@ -30,15 +31,16 @@ public class Graph {
 		return null;
 	}
 
-	public void getRadiusFromCity(City c) {
-		int cpt = 0;
+	public void setRadiusFromCity(City c) {
 		for (int i = 0; i < cities.size(); i++) {
 			if (cities.get(i) != c)
 				if (c.distance(cities.get(i)) < MAX_DISTANCE) {
-					System.out.println(cities.get(i));
-					cpt++;
+                    c.addAdjacent(cities.get(i));
 				}
 		}
-		System.out.println(cpt + " results...");
 	}
+
+	public void build() {
+        cities.forEach(this::setRadiusFromCity);
+    }
 }

@@ -26,27 +26,26 @@ public class Reader {
         try {
             String line = bReader.readLine();
 
-			if(line != null) {
-				String[] array = line.split(";");
+            if (line != null) {
+                String[] array = line.split(";");
 
-				// City parameters
-				String id 			= array[0];
-				String name 		= array[1];
-				int population 		= Integer.parseInt(array[2]);
-				double latitude 	= Double.parseDouble(array[3].replace(',', '.'));
-				double longitude 	= Double.parseDouble(array[4].replace(',', '.'));
+                // City parameters
+                String id = array[0];
+                String name = array[1];
+                int population = Integer.parseInt(array[2]);
+                double latitude = Double.parseDouble(array[3].replace(',', '.'));
+                double longitude = Double.parseDouble(array[4].replace(',', '.'));
 
-				return new City(id, name, population, latitude, longitude);
-			}
-			else {
-				bReader.close();
-				fReader.close();
-			}
+                return new City(id, name, population, latitude, longitude);
+            } else {
+                bReader.close();
+                fReader.close();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         // Error case
         return null;
-	}
+    }
 }

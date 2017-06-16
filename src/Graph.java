@@ -13,8 +13,8 @@ public class Graph {
         do {
             cityRead = r.read();
             if (cityRead != null) {
-                //if(cityRead.getPopulation() > 2000)
-                cities.add(cityRead);
+				if(cityRead.getPopulation() >= 3000)
+					cities.add(cityRead);
             } else {
                 System.out.println("Lecture ville nulle, length = " + cities.size());
             }
@@ -41,6 +41,11 @@ public class Graph {
     }
 
     public void build() {
+		// On ne prend pas toutes les villes du graphe pour raccourcir le parcours
+		/*for(int i = 0; i < cities.size(); i++) {
+			
+				cities.remove(i);
+		}*/
         cities.forEach(this::setRadiusFromCity);
     }
 }

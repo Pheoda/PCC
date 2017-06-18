@@ -9,10 +9,10 @@ public class Main {
         System.out.println("Start building.");
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
         //g.dijkstra(g.getCityFromId("lyon"), g.getCityFromId("lille"));
-        System.out.println("Done.");
-        System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
+       // System.out.println("Done.");
+        //System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
 		
-		ArrayList<City> result = g.a_star(g.getCityFromId("brest"), g.getCityFromId("cannes"));
+		ArrayList<City> result = g.a_star(g.getCityFromId("lyon"), g.getCityFromId("lille"));
 		for (City c : result) {
 			System.out.println(c.getName());
 		}

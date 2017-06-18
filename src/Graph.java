@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Graph {
 
-    private final int MAX_DISTANCE = 500;
-	private final int MIN_POPULATION = 200000;
+    private final int MAX_DISTANCE = 30;
+	private final int MIN_POPULATION = 1800;
 	private final double INFINITE = Double.POSITIVE_INFINITY;
 
     private ArrayList<City> cities;
@@ -16,6 +16,7 @@ public class Graph {
         do {
             cityRead = r.read();
             if (cityRead != null) {
+				//System.out.println("sdf");
 				if(cityRead.getPopulation() >= MIN_POPULATION)
 					cities.add(cityRead);
             } else {
@@ -131,6 +132,7 @@ public class Graph {
 		int nbArc = 1;
 		ArrayList<Node> openList = new ArrayList<>();
 		ArrayList<Node> closeList = new ArrayList<>();
+		this.build();
 		
 		Node currentNode = new Node(null, cityStart, 0);
 		currentNode.setCost((int) currentNode.getCurrent().distance(cityEnd));

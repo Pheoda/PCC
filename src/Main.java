@@ -12,13 +12,11 @@ public class Main {
         System.out.println(start.getHour() + ":" + start.getMinute() + ":" + start.getSecond());
 		
 		///// A* /////
-		/*ArrayList<City> result = g.a_star(g.getCityFromId("lyon"), g.getCityFromId("lille"));
-		for (City c : result) {
-			System.out.println(c.getName());
-		}*/
+		g.a_star(g.getCityFromId("lyon"), g.getCityFromId("lille"));
+		
 		
 		///// DIJKSTRA /////
-        g.dijkstra(g.getCityFromId("brest"), g.getCityFromId("cannes"));
+        //g.dijkstra(g.getCityFromId("brest"), g.getCityFromId("cannes"));
 		
 
 		LocalDateTime end = LocalDateTime.now();

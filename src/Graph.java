@@ -120,9 +120,9 @@ public class Graph {
 	}
 	
 	
-	//Suggestion si la ville d'arriver est une ville de plus de 15 000 hab
+	//Suggestion si la ville d'arrivée est une ville de plus de 15 000 hab
 	//on considère qu'il y a de meilleurs routes donc trajet plus rapide
-	public ArrayList<City> a_star(City cityStart, City cityEnd) {
+	public void a_star(City cityStart, City cityEnd) {
 		int nbArc = 1;
 		ArrayList<Node> openList = new ArrayList<>();
 		ArrayList<Node> closeList = new ArrayList<>();
@@ -156,7 +156,11 @@ public class Graph {
 			nbArc++;
 		}
 		closeList.add(currentNode);
-		return buildPath(closeList);		
+		
+		//affichage des villes traversées
+		for (City c : buildPath(closeList))
+			System.out.println(c.getName());
+		
 	}
 	
 	private static void concat(ArrayList<Node> list1, ArrayList<Node> list2) {

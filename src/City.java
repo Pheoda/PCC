@@ -7,8 +7,6 @@ public class City {
     private double latitude;
     private double longitude;
 	
-	private double distance; // Dijkstra distance
-
     private ArrayList<City> adjacent;
 
     public City(String id, String name, int population, double latitude, double longitude) {
@@ -46,14 +44,6 @@ public class City {
 	
 	public boolean isAdjacent(City c) {
 		return adjacent.contains(c);
-	}
-
-	public double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
 	}
 
     @Override

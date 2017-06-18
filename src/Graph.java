@@ -50,21 +50,15 @@ public class Graph {
         cities.forEach(this::setRadiusFromCity);
     }
 	
-	// ATTENTION : on vide la variable cities dans cette fonction !
-	// Plus tard : implémenter toDo deep copy de cities (avec adjacents !)
+
 	public void dijkstra(City cityStart, City cityEnd) {
 		ArrayList<Distance> result = new ArrayList<>();
-		//ArrayList<City> toDo = new ArrayList<>(); // Deep copy de cities
 		
-		System.out.println("Starting Dijkstra");
+		//System.out.println("Starting Dijkstra");
 		
 		build(); // Remplit le graphe avec les villes adjacentes
 		
-		System.out.println("Build finished");
-		
-		// Deep copy here
-		
-		System.out.println("Deep copy finished");
+		//System.out.println("Build finished");
 		
 		result.add(new Distance(cityStart, 0));
 		cities.remove(cityStart);
@@ -99,7 +93,7 @@ public class Graph {
 			}
 		}
 		
-		System.out.println("Distance entre les 2 villes : " + getDistanceFromDijkstra(result, cityEnd));
+		System.out.println("Distance entre " + cityStart.getName() + " et " + cityEnd.getName() + " : " + getDistanceFromDijkstra(result, cityEnd));
 		
 		
 		/*System.out.println("\n\n====AFFICHAGE RESULTAT====");

@@ -8,7 +8,7 @@ public class Main {
 
         System.out.println("Start building.");
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
-        g.build();
+        //g.dijkstra(g.getCityFromId("lyon"), g.getCityFromId("lille"));
         System.out.println("Done.");
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
 		
@@ -20,4 +20,5 @@ public class Main {
 		System.out.println("Done.");
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
     }
+
 }

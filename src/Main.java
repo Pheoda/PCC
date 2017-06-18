@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -9,6 +10,14 @@ public class Main {
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
         g.build();
         System.out.println("Done.");
+        System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
+		
+		ArrayList<City> result = g.a_star(g.getCityFromId("brest"), g.getCityFromId("cannes"));
+		for (City c : result) {
+			System.out.println(c.getName());
+		}
+		
+		System.out.println("Done.");
         System.out.println(LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + ":" + LocalDateTime.now().getSecond());
     }
 }

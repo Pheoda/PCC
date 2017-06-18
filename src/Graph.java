@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Graph {
-    private final int MAX_DISTANCE = 20;
+    private final int MAX_DISTANCE = 30;
 
     private ArrayList<City> cities;
 
@@ -13,7 +13,7 @@ public class Graph {
         do {
             cityRead = r.read();
             if (cityRead != null) {
-				if(cityRead.getPopulation() >= 3000)
+				if(cityRead.getPopulation() >= 1800)
 					cities.add(cityRead);
             } else {
                 System.out.println("Lecture ville nulle, length = " + cities.size());
@@ -52,45 +52,51 @@ public class Graph {
 	
 	//Suggestion si la ville d'arriver est une ville de plus de 15 000 hab
 	//on considère qu'il y a de meilleurs routes donc trajet plus rapide
-	public static ArrayList<City> a_star(City cityStart, City cityEnd) {
-		//On vérifie la validité des IDs
-		/*for (City c : cities) {
-			if () {
-				
-			}
-		}*/
+	public ArrayList<City> a_star(City cityStart, City cityEnd) {
 		int nbArc = 1;
 		ArrayList<Node> openList = new ArrayList<>();
 		ArrayList<Node> closeList = new ArrayList<>();
 		
-		Node startNodes = new Node(null, cityStart, 0);
+		Node currentNode = new Node(null, cityStart, 0);
+		currentNode.setCost((int) currentNode.getCurrent().distance(cityEnd));
 		
-		closeList.add(startNodes);
-		
-		while (closeList.get(closeList.size() - 1).getCurrent() != cityEnd) {
+		while (currentNode.getCurrent().getId() != cityEnd.getId()) {
+			closeList.add(currentNode);
+			openList.remove(currentNode);
+			
 			//On ajoute les successeurs à openList si ils n'y sont pas déjà
-			City curCity = closeList.get(closeList.size() - 1).getCurrent();
-			for (City c : curCity.getAdjacent()) {
-				for (Node opNode : openList) {
-					if (!opNode.getCurrent().equals(c)) 
-						openList.add(new Node(curCity, c, nbArc + (int)c.distance(cityEnd)));
-				}
+			ArrayList<Node> tempNode2Add = new ArrayList<>();
+			
+			for (City c : currentNode.getCurrent().getAdjacent()) {
+				int val = nbArc * 10 + (int)c.distance(cityEnd);
+				tempNode2Add.add(new Node(currentNode.getCurrent(), c, val));
 			}
-
-			//on prend le nœud ayant le cout le moins élevé
-			Node node2Add = openList.get(0);
-			for (Node n : openList) {
-				if (node2Add.getCost() > n.getCost()) {
-					node2Add = n;
-				}
+			concat(openList, tempNode2Add);
+			tempNode2Add = null;
+			
+			currentNode = calculLeastCost(openList);
+			
+			if (closeList.size() > cities.size() * 100) {
+				System.err.println("Algo coincé au dans un trou perdu, reduire la restriction sur la population");
+				System.exit(1);
 			}
-			openList.remove(node2Add);
-			closeList.add(node2Add);
+			
 
 			nbArc++;
 		}
-		
+		closeList.add(currentNode);
 		return buildPath(closeList);		
+	}
+	
+	private static void concat(ArrayList<Node> list1, ArrayList<Node> list2) {
+		if (list1.isEmpty() || list2.isEmpty())
+			list1.addAll(list2);
+		else {
+			for (Node n2 : list2) {
+				if (n2.isNotIn(list1))
+					list1.add(n2);
+			}
+		}
 	}
 	
 	private static ArrayList<City> buildPath(ArrayList<Node> listNode) {
@@ -114,6 +120,18 @@ public class Graph {
 		
 		return finalCityList;
 	}
+
+	private static Node calculLeastCost(ArrayList<Node> openList) {
+		Node node2Select = null;
+		
+		for (Node n : openList) {
+			if (node2Select == null || node2Select.getCost() > n.getCost())
+				node2Select = n;
+		}
+		
+		return node2Select;
+	}
+	
 	
 	
 	
